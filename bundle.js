@@ -303,7 +303,7 @@ var SearchModal = /*#__PURE__*/function () {
 
       if (isNextScroll) {
         this.renderVideoList({
-          url: "https://622752939a5410d43ba3fbcd--modest-euler-778376.netlify.app/dummy/youtube/v3/search?",
+          url: "https://622752939a5410d43ba3fbcd--modest-euler-778376.netlify.app/youtube/v3/search?",
           keyword: this.searchInputKeyword.value,
           options: _api__WEBPACK_IMPORTED_MODULE_6__.OPTIONS,
           pageToken: this.pageToken
@@ -325,7 +325,7 @@ var SearchModal = /*#__PURE__*/function () {
                 try {
                   validateKeyword(this.searchInputKeyword.value);
                   this.renderVideoList({
-                    url: "https://622752939a5410d43ba3fbcd--modest-euler-778376.netlify.app/dummy/youtube/v3/search?",
+                    url: "https://622752939a5410d43ba3fbcd--modest-euler-778376.netlify.app/youtube/v3/search?",
                     keyword: this.searchInputKeyword.value,
                     options: _api__WEBPACK_IMPORTED_MODULE_6__.OPTIONS,
                     pageToken: this.pageToken
