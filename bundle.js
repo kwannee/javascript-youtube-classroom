@@ -9174,44 +9174,37 @@ var EXCEEDED_QUOTA_TEMPLATE = "\n  \uC624\uB298 \uAC80\uC0C9 \uD560\uB2F9\uB7C9\
 
 var SearchModal = /*#__PURE__*/function () {
   function SearchModal(element) {
+    var _context, _context2, _context3;
+
     (0,_babel_runtime_corejs3_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3__["default"])(this, SearchModal);
 
-    this.element = element;
-    this.configureDOMs();
-    this.bindEvents();
+    this.element = element; //configureDOMs
+
+    this.searchInputKeyword = this.element.querySelector('#search-input-keyword');
+    this.searchErrorMessage = this.element.querySelector('#search-error-message');
+    this.videoList = this.element.querySelector('.video-list');
+    this.dimmer = this.element.querySelector('.dimmer');
+    this.searchForm = this.element.querySelector('#search-form');
+    this.noResultDescription = this.element.querySelector('.no-result__description');
+
+    var _this$element$querySe = this.element.querySelectorAll('.search-result');
+
+    var _this$element$querySe2 = (0,_babel_runtime_corejs3_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_this$element$querySe, 2);
+
+    this.searchResultContainer = _this$element$querySe2[0];
+    this.noSearchResultContainer = _this$element$querySe2[1];
+    //bindEvents
+    this.dimmer.addEventListener('click', _babel_runtime_corejs3_core_js_stable_instance_bind__WEBPACK_IMPORTED_MODULE_15___default()(_context = this.closeModalHandler).call(_context, this));
+    this.searchForm.addEventListener('submit', _babel_runtime_corejs3_core_js_stable_instance_bind__WEBPACK_IMPORTED_MODULE_15___default()(_context2 = this.searchHandler).call(_context2, this));
+    this.videoList.addEventListener('scroll', (0,_utils_throttle__WEBPACK_IMPORTED_MODULE_20__["default"])(_babel_runtime_corejs3_core_js_stable_instance_bind__WEBPACK_IMPORTED_MODULE_15___default()(_context3 = this.scrollHandler).call(_context3, this), _constants__WEBPACK_IMPORTED_MODULE_18__.THROTTLE_PENDING_MILLISECOND));
     this.VideoCardContainer = new _common_VideosCardContainer__WEBPACK_IMPORTED_MODULE_19__["default"](this.videoList, {
       items: []
     });
     this.pageToken = '';
+    this.keyword = '';
   }
 
   (0,_babel_runtime_corejs3_helpers_createClass__WEBPACK_IMPORTED_MODULE_4__["default"])(SearchModal, [{
-    key: "configureDOMs",
-    value: function configureDOMs() {
-      this.searchInputKeyword = this.element.querySelector('#search-input-keyword');
-      this.searchErrorMessage = this.element.querySelector('#search-error-message');
-      this.videoList = this.element.querySelector('.video-list');
-      this.dimmer = this.element.querySelector('.dimmer');
-      this.searchForm = this.element.querySelector('#search-form');
-      this.noResultDescription = this.element.querySelector('.no-result__description');
-
-      var _this$element$querySe = this.element.querySelectorAll('.search-result');
-
-      var _this$element$querySe2 = (0,_babel_runtime_corejs3_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_this$element$querySe, 2);
-
-      this.searchResultContainer = _this$element$querySe2[0];
-      this.noSearchResultContainer = _this$element$querySe2[1];
-    }
-  }, {
-    key: "bindEvents",
-    value: function bindEvents() {
-      var _context, _context2, _context3;
-
-      this.dimmer.addEventListener('click', _babel_runtime_corejs3_core_js_stable_instance_bind__WEBPACK_IMPORTED_MODULE_15___default()(_context = this.closeModalHandler).call(_context, this));
-      this.searchForm.addEventListener('submit', _babel_runtime_corejs3_core_js_stable_instance_bind__WEBPACK_IMPORTED_MODULE_15___default()(_context2 = this.searchHandler).call(_context2, this));
-      this.videoList.addEventListener('scroll', (0,_utils_throttle__WEBPACK_IMPORTED_MODULE_20__["default"])(_babel_runtime_corejs3_core_js_stable_instance_bind__WEBPACK_IMPORTED_MODULE_15___default()(_context3 = this.scrollHandler).call(_context3, this), _constants__WEBPACK_IMPORTED_MODULE_18__.THROTTLE_PENDING_MILLISECOND));
-    }
-  }, {
     key: "closeModalHandler",
     value: function closeModalHandler() {
       this.element.classList.add('hide');
@@ -9228,7 +9221,7 @@ var SearchModal = /*#__PURE__*/function () {
       if (isEndOfScroll) {
         this.renderVideoList({
           url: _api__WEBPACK_IMPORTED_MODULE_17__.YOUTUBE_URL,
-          keyword: this.searchInputKeyword.value,
+          keyword: this.keyword,
           options: _api__WEBPACK_IMPORTED_MODULE_17__.OPTIONS,
           pageToken: this.pageToken
         });
@@ -9246,6 +9239,7 @@ var SearchModal = /*#__PURE__*/function () {
 
                 try {
                   validateKeyword(this.searchInputKeyword.value);
+                  this.keyword = this.searchInputKeyword.value;
                   this.videoList.scrollTo({
                     top: 0
                   });
@@ -9253,7 +9247,7 @@ var SearchModal = /*#__PURE__*/function () {
                   this.pageToken = '';
                   this.renderVideoList({
                     url: _api__WEBPACK_IMPORTED_MODULE_17__.YOUTUBE_URL,
-                    keyword: this.searchInputKeyword.value,
+                    keyword: this.keyword,
                     options: _api__WEBPACK_IMPORTED_MODULE_17__.OPTIONS,
                     pageToken: this.pageToken
                   });
